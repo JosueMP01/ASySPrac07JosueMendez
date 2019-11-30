@@ -1,0 +1,251 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>PR&Aacute;CTICA 07. RESPUESTA EN FRECUENCIA, SIMULACI&Oacute;N EN MATLAB.</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-29"><meta name="DC.source" content="ASySPrac07JosueMendez.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>PR&Aacute;CTICA 07. RESPUESTA EN FRECUENCIA, SIMULACI&Oacute;N EN MATLAB.</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Integrantes</a></li><li><a href="#2">Objetivos</a></li><li><a href="#3">Introducci&oacute;n</a></li><li><a href="#4">Desarrollo</a></li><li><a href="#6">Ap&eacute;ndices</a></li><li><a href="#7">Referencias</a></li></ul></div><h2 id="1">Integrantes</h2><div><ul><li>Cuevas Morales Sa&uacute;l As&iacute;s</li><li>Gonzalez Z&uacute;&ntilde;iga Alexis Bryan</li><li>M&eacute;ndez Pallares Josu&eacute;</li><li>Vallejo Camarillo Mois&eacute;s Eduardo</li></ul></div><h2 id="2">Objetivos</h2><div><ol><li>Conocer los conceptos de respuesta en frecuencia.</li><li>Conocer los conceptos de filtros.</li><li>Realizar graficas de Bode (manual y con MATLAB).</li><li>Realizar simulaciones num&eacute;ricas de sistemas con MATLAB.</li></ol></div><h2 id="3">Introducci&oacute;n</h2><p>Dise&ntilde;o de filtros por colocaci&oacute;n de polos y ceros de H(s).</p><p>Un sistema de transferencia puede ser expresado en su forma polar de la siguiente manera:</p><p>La magnitud es igual a b0*producto de las distancias de ceros a p/producto de las distancias de los polos a p.</p><p>Y el &aacute;ngulo es definido por la suma de los &aacute;ngulos cero &#8211; la suma de los &aacute;ngulos de los polos a p.</p><p>Ganancia adquirida por un polo</p><p>Si se quiere comprender el efecto de los polos y los ceros en la respuesta de la frecuencia, se debe considerar un caso hipotetico de un simple polo -a+jw0. Para encontrar la respuesta a la amplitud para determinado w, debemos conectar el polo al punto jw. Si la distancia de la l&iacute;nea es d en tonces la magnitud es K/d</p><p>Donde el valor exacto de la constante k no es importante en este punto. Como w incrementa de cero, d disminuye progresivamente hasta que w alcance el valor w0. En extremo caso cuando a=0, la ganancia en a0 tiende al infinito. La repetici&oacute;n de polos aumenta el efecto de frecuencia selectiva.</p><p>Supresi&oacute;n de ganancia por un cero</p><p>Usando el mismo argumento observamos que los ceros en -a&plusmn;jw0 tienen exactamente el efecto opuesto de la supresi&oacute;n de la ganancia en w0. Un cero en el eje imaginario en jw0 suprimira la ganancia en la frecuencia w0. Tambi&eacute;n unos pares de polo y uncero colocados cerca (dipolo) tienden a cancelarse mutuamente la influencia del otro en la frecuencia.</p><h2 id="4">Desarrollo</h2><div><ul><li><b>Problema 1.</b> El siguiente sistema es un ciruito electrico RLC en serie, donde la estrada es el voltaje suministrado al circuito y la salida es el voltaje en la resistencia,</li></ul></div><p><img vspace="5" hspace="5" src="C:\Users\Usuario\Desktop\Josu%C3%A9\3er Semestre\ASyS\Pr%C3%A1ctica07\RLC_schematic.png" alt=""> </p><p>realiza lo siguiente</p><p><b>1a.</b> Demuestra que la ecuaci&oacute;n que modela el sistema es</p><p><img src="ASySPrac07JosueMendez_eq17665202625424679462.png" alt="$$\ddot{V}_o(t)+\frac{R}{L}\dot{V}_o(t)+\frac{1}{LC}V_o(t) = \frac{R}{L}\dot{V_i}(t)$$"></p><p>Ayuda: Voltaje suministrado es igual a voltaje consumido, escribir las variables en terminos de la salida mediante las relaciones de voltaje corriente en cada elemento y utilizar el hecho de que es un circuito en serie</p><p><b>1b.</b> Encuentre la funci&oacute;n de transferencia.</p><p>En adelante suponga que <img src="ASySPrac07JosueMendez_eq15053406074287739616.png" alt="$L=1 H$">, <img src="ASySPrac07JosueMendez_eq17197569115849678565.png" alt="$C=510\,\mu F$"> y <img src="ASySPrac07JosueMendez_eq11390681866710100007.png" alt="$R=50\, \Omega$"></p><p><b>1c.</b> Reporta el c&oacute;digo y la gr&aacute;fica de la respuesta al impulso, para diferentes tiempos de simulaci&oacute;n de tal manera que se muestre el comportamiento del sistema</p><p><b>1d.</b> Reporta el codigo y la gr&aacute;fica de la respuesta al escal&oacute;n, para diferentes tiempos de simulaci&oacute;n de tal manera que se muestre el comportamiento del sistema</p><p>Define <img src="ASySPrac07JosueMendez_eq03865254568685440926.png" alt="$\omega_0=1/\sqrt(L*C)$"></p><p><b>1e.</b> Presenta las simulaciones con una entrada seno de de amplitud 1 con frecuencias, <img src="ASySPrac07JosueMendez_eq12472746766535792522.png" alt="$\frac{1}{2}\omega_0$">, <img src="ASySPrac07JosueMendez_eq08013314814671814516.png" alt="$\omega_0$">, y <img src="ASySPrac07JosueMendez_eq10185657534303922379.png" alt="$2\omega_0$">, para diferentes tiempos de simulaci&oacute;n de tal manera que se muestre el comportamiento del sistema</p><p><b>1f.</b> Reporta las gr&aacute;ficas de Bode para los valores de <img src="ASySPrac07JosueMendez_eq03442895190380135198.png" alt="$R$"> y <img src="ASySPrac07JosueMendez_eq03986222445007418011.png" alt="$C$"> propuestos y varia <img src="ASySPrac07JosueMendez_eq11904963258706611165.png" alt="$L$"> de 1 a 1e-6 (en potencias de 10), &iquest;Qu&eacute; sucede con la respuesta en frecuencia?</p><p><b>1g.</b> Reporta las gr&aacute;ficas de Bode para los valores de <img src="ASySPrac07JosueMendez_eq11904963258706611165.png" alt="$L$"> y <img src="ASySPrac07JosueMendez_eq03986222445007418011.png" alt="$C$"> propuestos y varia <img src="ASySPrac07JosueMendez_eq03442895190380135198.png" alt="$R$"> para <img src="ASySPrac07JosueMendez_eq06610265431356057978.png" alt="$2,10,20 K\Omega$">, &iquest;Qu&eacute; sucede con la respuesta en frecuencia?</p><div><ul><li><b>Problema 2.</b> Consideremos el siguiente sistema</li></ul></div><p><img src="ASySPrac07JosueMendez_eq12657513226747314603.png" alt="$$G(s)=\omega_c/(s+\omega_c)$$"></p><p><b>2a.</b> Muestra que <img src="ASySPrac07JosueMendez_eq13210163425651478975.png" alt="$|H(0j)|=1$"></p><p><b>2b.</b> Muestra que cuando que la magnitud de la respuesta en frecuencia es <img src="ASySPrac07JosueMendez_eq07094794556010101674.png" alt="$-3db$"> cuando <img src="ASySPrac07JosueMendez_eq04828565000110083945.png" alt="$\omega=\omega_c$"></p><p><b>2c.</b> Para modificar el comportamiento del sistema, se realiza una retroalimentaci&oacute;n negativa con <img src="ASySPrac07JosueMendez_eq13725936565931534356.png" alt="$k=9$">. &iquest;Para qu&eacute; valor de <img src="ASySPrac07JosueMendez_eq08589834809570054062.png" alt="$\omega$"> se tiene una ganancia de <img src="ASySPrac07JosueMendez_eq07094794556010101674.png" alt="$-3db$">?, &iquest;Qu&eacute; concluye?</p><p><b>2d.</b> Para modificar el comportamiento del sistema, se realiza una retroalimentaci&oacute;n negativa con <img src="ASySPrac07JosueMendez_eq17416341464737638526.png" alt="$k=0.9$">. &iquest;Para qu&eacute; valor de <img src="ASySPrac07JosueMendez_eq08589834809570054062.png" alt="$\omega$"> se tiene una ganancia de <img src="ASySPrac07JosueMendez_eq07094794556010101674.png" alt="$-3db$">?, &iquest;Qu&eacute; concluye?</p><p><b>2e.</b> Reporte las graficas de bode (c&oacute;digo) de los tres sistemas anteriores.</p><p><img vspace="5" hspace="5" src="C:\Users\Usuario\Desktop\Josu%C3%A9\3er Semestre\ASyS\Pr%C3%A1ctica07\Bloques1.png" alt=""> </p><div><ul><li><b>Problema 3</b> Para el siguiente sistema</li></ul></div><p><img src="ASySPrac07JosueMendez_eq14350229380769834299.png" alt="$$H(s)=\frac{(s+10)(s+20)}{s^2(s+100)}$$"></p><p><b>3a.</b> Bosqueja las gr&aacute;ficas de Bode a mano paso a paso, puedes revisar el ejemplo 4.25 y 4.26 de Lathi</p><p><b>3b.</b> Utiliza la instrucci&oacute;n <i>bode</i> para realizar las gr&aacute;ficas de bode</p><div><ul><li><b>Problema 4</b> Para el sistema</li></ul></div><p><img src="ASySPrac07JosueMendez_eq06949234320274469163.png" alt="$$H(s)=\frac{10(s+2)}{s^2+8s+15}$$"></p><p>Simule la respuesta al escal&oacute;n (CI=0), para diferentes tiempos de simulaci&oacute;n de tal manera que se muestre el comportamiento del sistema y comparela con la soluci&oacute;n anal&iacute;tica</p><p><img src="ASySPrac07JosueMendez_eq00127783516737992108.png" alt="$$y(t)=1.33u(t)+1.67e^{-3t}u(t)-3e^{-5t}u(t)$$"></p><div><ul><li><b>Problema 5</b> Se tiene el siguiente sistema</li></ul></div><p><img src="ASySPrac07JosueMendez_eq01839538569333147174.png" alt="$$\ddot{x}+5x=f$$"></p><p><b>5a.</b> &iquest;El sistema es BIBO estable?</p><p><b>5b.</b> Encuentre la respuesta  (anal&iacute;tica) para condiciones iniciales cero del sistema si <img src="ASySPrac07JosueMendez_eq05325103296798636949.png" alt="$f(t)=sen(\sqrt{5}t)u(t)$">, recuerde aplicar el resultado de convoluci&oacute;n si es necesario.</p><p><b>5c.</b> De acuerdo a 5a, &iquest;tiene sentido hablar de la respuesta en estado estacionario?</p><p><b>5d.</b> Presente las graficas de Bode del sistema utilizando la instrucci&oacute;n <i>bode</i></p><p><b>5e.</b> &iquest;Cu&aacute;les son sus concluisiones al respecto?</p><p><b>5f.</b> Encuentre la respuesta  (anal&iacute;tica) para condiciones iniciales cero del sistema si <img src="ASySPrac07JosueMendez_eq06375756332397265826.png" alt="$f(t)=sen(\sqrt{5}/2t)u(t)$">, compare con la simulaci&oacute;n en MATLAB</p><p><b>5g.</b> Encuentre la respuesta  (anal&iacute;tica) para condiciones iniciales cero del sistema si <img src="ASySPrac07JosueMendez_eq09989851041438858070.png" alt="$f(t)=sen(2\sqrt{5}t)u(t)$">, compare con la simulaci&oacute;n en MATLAB</p><div><ul><li><b>Problema 6</b> Investigue la instrucci&oacute;n <i>linearSystemAnalyzer</i> (disposible a partir de 2015a) y con ayuda de esta, reporte las gr&aacute;ficas de</li></ul></div><p><b>6a.</b> Respuesta al Impulso</p><p><b>6b.</b> Respuesta al escal&oacute;n</p><p><b>6c.</b> Respuesta a <img src="ASySPrac07JosueMendez_eq02036735383387106679.png" alt="$x(t)=cos(2t)u(t)$"></p><p><b>6d.</b> Graficas de Bode</p><p>Para condiciones iniciales cero y 10 segundos de simulaci&oacute;n, para el sistema.</p><p><img src="ASySPrac07JosueMendez_eq04474670953842134464.png" alt="$$\ddot{y}+3\dot{y}+2y=x$$"></p><h2 id="6">Ap&eacute;ndices</h2><h2 id="7">Referencias</h2><div><ul><li>B. P. Lathi. (2005). Linear Systems and Signals. 198 Madison Avenue, New York, New York 10016: Oxford University Press.</li></ul></div><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% PRÁCTICA 07. RESPUESTA EN FRECUENCIA, SIMULACIÓN EN MATLAB.
+%% Integrantes
+%
+% * Cuevas Morales Saúl Asís
+% * Gonzalez Zúñiga Alexis Bryan
+% * Méndez Pallares Josué
+% * Vallejo Camarillo Moisés Eduardo
+%
+%% Objetivos
+%
+% # Conocer los conceptos de respuesta en frecuencia.
+% # Conocer los conceptos de filtros.
+% # Realizar graficas de Bode (manual y con MATLAB).
+% # Realizar simulaciones numéricas de sistemas con MATLAB.
+%
+%% Introducción
+% 
+% Diseño de filtros por colocación de polos y ceros de H(s).
+%
+% Un sistema de transferencia puede ser expresado en su forma polar de la siguiente manera:
+% 
+% La magnitud es igual a b0*producto de las distancias de ceros a
+% p/producto de las distancias de los polos a p.
+% 
+% 
+% Y el ángulo es definido por la suma de los ángulos cero – la suma de los
+% ángulos de los polos a p.
+% 
+% Ganancia adquirida por un polo
+% 
+% Si se quiere comprender el efecto de los polos y los ceros en la respuesta de la frecuencia, se debe considerar un caso hipotetico de un simple polo -a+jw0. Para encontrar la respuesta a la amplitud para determinado w, debemos conectar el polo al punto jw. Si la distancia de la línea es d en tonces la magnitud es 
+% K/d
+% 
+% Donde el valor exacto de la constante k no es importante en este punto. Como w incrementa de cero, d disminuye progresivamente hasta que w alcance el valor w0. En extremo caso cuando a=0, la ganancia en a0 tiende al infinito. La repetición de polos aumenta el efecto de frecuencia selectiva.
+% 
+% 
+% Supresión de ganancia por un cero
+% 
+% Usando el mismo argumento observamos que los ceros en -a±jw0 tienen
+% exactamente el efecto opuesto de la supresión de la ganancia en w0. Un
+% cero en el eje imaginario en jw0 suprimira la ganancia en la frecuencia
+% w0. También unos pares de polo y uncero colocados cerca (dipolo) tienden
+% a cancelarse mutuamente la influencia del otro en la frecuencia.
+% 
+%% Desarrollo
+%%
+% * *Problema 1.* El siguiente sistema es un ciruito electrico RLC en serie, donde la
+% estrada es el voltaje suministrado al circuito y la salida es el voltaje
+% en la resistencia,
+% 
+% <<C:\Users\Usuario\Desktop\Josué\3er Semestre\ASyS\Práctica07\RLC_schematic.png>>
+% 
+% realiza lo siguiente 
+% 
+% *1a.* Demuestra que la ecuación que modela el sistema es 
+%
+% $$\ddot{V}_o(t)+\frac{R}{L}\dot{V}_o(t)+\frac{1}{LC}V_o(t) = \frac{R}{L}\dot{V_i}(t)$$
+%  
+% Ayuda: Voltaje suministrado es igual a voltaje consumido, escribir las
+% variables en terminos de la salida mediante las relaciones de voltaje
+% corriente en cada elemento y utilizar el hecho de que es un circuito en
+% serie
+% 
+% *1b.* Encuentre la función de transferencia. 
+%
+% En adelante suponga que $L=1 H$, $C=510\,\mu F$ y $R=50\, \Omega$
+%
+% *1c.* Reporta el código y la gráfica de la respuesta al impulso, para
+% diferentes tiempos de simulación de tal manera que se muestre el
+% comportamiento del sistema
+%
+% *1d.* Reporta el codigo y la gráfica de la respuesta al escalón, para
+% diferentes tiempos de simulación de tal manera que se muestre el
+% comportamiento del sistema
+%
+% Define $\omega_0=1/\sqrt(L*C)$
+%
+% *1e.* Presenta las simulaciones con una entrada seno de 
+% de amplitud 1 con frecuencias, $\frac{1}{2}\omega_0$, $\omega_0$, y
+% $2\omega_0$, para
+% diferentes tiempos de simulación de tal manera que se muestre el
+% comportamiento del sistema
+%
+% *1f.* Reporta las gráficas de Bode para los valores de $R$ y $C$ propuestos y
+% varia $L$ de 1 a 1e-6 (en potencias de 10), ¿Qué sucede con la respuesta
+% en frecuencia?
+%
+% *1g.* Reporta las gráficas de Bode para los valores de $L$ y $C$ propuestos y
+% varia $R$ para $2,10,20 K\Omega$, ¿Qué sucede con la respuesta
+% en frecuencia?
+%
+% * *Problema 2.* Consideremos el siguiente sistema
+%
+% $$G(s)=\omega_c/(s+\omega_c)$$
+%
+% *2a.* Muestra que $|H(0j)|=1$
+%
+% *2b.* Muestra que cuando que la magnitud de la respuesta en frecuencia es
+% $-3db$ cuando $\omega=\omega_c$
+%
+% *2c.* Para modificar el comportamiento del sistema, se realiza una
+% retroalimentación negativa con $k=9$. ¿Para qué valor de $\omega$ se
+% tiene una ganancia de $-3db$?, ¿Qué concluye?
+%
+% *2d.* Para modificar el comportamiento del sistema, se realiza una
+% retroalimentación negativa con $k=0.9$. ¿Para qué valor de $\omega$ se
+% tiene una ganancia de $-3db$?, ¿Qué concluye?
+%
+% *2e.* Reporte las graficas de bode (código) de los tres sistemas anteriores.
+%
+% <<C:\Users\Usuario\Desktop\Josué\3er Semestre\ASyS\Práctica07\Bloques1.png>>
+%
+% * *Problema 3* Para el siguiente sistema
+%
+% $$H(s)=\frac{(s+10)(s+20)}{s^2(s+100)}$$
+%
+% *3a.* Bosqueja las gráficas de Bode a mano paso a paso, puedes revisar el
+% ejemplo 4.25 y 4.26 de Lathi
+%
+% *3b.* Utiliza la instrucción _bode_ para realizar las gráficas de bode
+%
+% * *Problema 4* Para el sistema 
+%
+% $$H(s)=\frac{10(s+2)}{s^2+8s+15}$$
+%
+% Simule la respuesta al escalón (CI=0), para
+% diferentes tiempos de simulación de tal manera que se muestre el
+% comportamiento del sistema y comparela con la solución
+% analítica
+%
+% $$y(t)=1.33u(t)+1.67e^{-3t}u(t)-3e^{-5t}u(t)$$
+%
+% * *Problema 5* Se tiene el siguiente sistema 
+%
+% $$\ddot{x}+5x=f$$
+%
+% *5a.* ¿El sistema es BIBO estable? 
+%
+% *5b.* Encuentre la respuesta  (analítica) para condiciones iniciales cero del sistema si
+% $f(t)=sen(\sqrt{5}t)u(t)$, recuerde aplicar el resultado de convolución si es
+% necesario.
+%
+% *5c.* De acuerdo a 5a, ¿tiene sentido hablar de la respuesta en estado
+% estacionario?
+%
+% *5d.* Presente las graficas de Bode del sistema utilizando la instrucción
+% _bode_
+%
+% *5e.* ¿Cuáles son sus concluisiones al respecto?
+% 
+% *5f.* Encuentre la respuesta  (analítica) para condiciones iniciales cero del sistema si
+% $f(t)=sen(\sqrt{5}/2t)u(t)$, compare con la simulación en MATLAB
+%
+% *5g.* Encuentre la respuesta  (analítica) para condiciones iniciales cero del sistema si
+% $f(t)=sen(2\sqrt{5}t)u(t)$, compare con la simulación en MATLAB
+%
+% * *Problema 6* Investigue la instrucción _linearSystemAnalyzer_ (disposible a partir de 2015a)
+% y con ayuda de esta, reporte las gráficas de 
+%
+% *6a.* Respuesta al Impulso
+%
+% *6b.* Respuesta al escalón
+%
+% *6c.* Respuesta a $x(t)=cos(2t)u(t)$
+%
+% *6d.* Graficas de Bode
+%
+% Para condiciones iniciales cero y 10 segundos de simulación, para el sistema.
+%
+% $$\ddot{y}+3\dot{y}+2y=x$$
+% 
+%% Apéndices
+% 
+% 
+% 
+%% Referencias
+% 
+% * B. P. Lathi. (2005). Linear Systems and Signals. 198 Madison Avenue,
+% New York, New York 10016: Oxford University Press.
+##### SOURCE END #####
+--></body></html>
